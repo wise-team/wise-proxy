@@ -11,7 +11,7 @@ CONTAINER_NAME="wise-proxy"
 CACHE_SIZE="256m"
 
 docker run \
-  --rm
+  --rm \
   --name "${CONTAINER_NAME}" \
   --restart always \
   --network="host" \
