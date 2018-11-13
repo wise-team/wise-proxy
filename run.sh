@@ -11,6 +11,7 @@ CONTAINER_NAME="wise-proxy"
 CACHE_SIZE="256m"
 
 docker run \
+  --rm
   --name "${CONTAINER_NAME}" \
   --restart always \
   --network="host" \
@@ -24,5 +25,4 @@ docker run \
   -v "${LETSENCRYPT_ETC_DIR}:/cert/letsencrypt_etc:ro" \
   -v "${DIR}/html_main:/html/main:ro" \
   -d \
-  "${IMAGE}"  
-  
+  "${IMAGE}"
