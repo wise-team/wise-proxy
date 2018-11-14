@@ -4,9 +4,13 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 if [ "${WISE_ENVIRONMENT_TYPE}" = "production" ]; then
     #§ 'export DOMAINS_OPTS="-d ' + data.config.proxy.certs.domains.production.join(" -d ") + '"'
     export DOMAINS_OPTS="-d wise.vote -d sql.wise.vote -d hub.wise.vote -d test.wise.vote"
+    #§ 'export CERTBOT_EMAIL="' + data.config.environments.production.certbot.email + '"'
+    export CERTBOT_EMAIL="noisy.pl@gmail.com"
 elif [ "${WISE_ENVIRONMENT_TYPE}" = "staging" ]; then
     #§ 'export DOMAINS_OPTS="-d ' + data.config.proxy.certs.domains.staging.join(" -d ") + '"'
     export DOMAINS_OPTS="-d dev.wise.jblew.pl -d sql.dev.wise.jblew.pl -d hub.dev.wise.jblew.pl -d test.dev.wise.jblew.pl"
+    #§ 'export CERTBOT_EMAIL="' + data.config.environments.staging.certbot.email + '"'
+    export CERTBOT_EMAIL="jedrzejblew@gmail.com"
 else 
     echo "Given WISE_ENVIRONMENT_TYPE not present or not supported"
     exit 1
@@ -20,7 +24,7 @@ export LETSENCRYPT_LIB_DIR="/opt/wise/certs/letsencrypt_lib"
 
 export IMAGE="nginx"
 #§ 'export CONTAINER_NAME="' + data.config.proxy.docker.container + '"'
-CONTAINER_NAME="wise-proxy"
+export CONTAINER_NAME="wise-proxy"
 
 export CACHE_SIZE="256m"
 

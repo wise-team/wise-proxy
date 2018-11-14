@@ -11,5 +11,6 @@ sudo docker run -it --rm --name certbot \
     -v "${LETSENCRYPT_LIB_DIR}:/var/lib/letsencrypt" \
     certbot/certbot certonly \
     --standalone --preferred-challenges http \
+    --email ${CERTBOT_EMAIL} \
     ${DOMAINS_OPTS}
 
