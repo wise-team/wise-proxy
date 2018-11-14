@@ -10,7 +10,6 @@ docker run \
   --restart always \
   --network="host" \
   --memory-swappiness=0 \
-  --read-only \
   --tmpfs /var/cache/nginx:rw,noexec,nosuid,size=${CACHE_SIZE} \
   --tmpfs /var/run:rw,noexec,nosuid,size=20k \
   -u nginx \
