@@ -10,8 +10,8 @@ docker run \
   --restart always \
   --network="host" \
   --memory-swappiness=0 \
-  --tmpfs /var/cache/nginx:rw,noexec,nosuid,size=${CACHE_SIZE} \
-  --tmpfs /var/run:rw,noexec,nosuid,size=20k \
+  --tmpfs /var/cache/nginx:rw,noexec,nosuid,size=${CACHE_SIZE},mode=1777 \
+  --tmpfs /var/run:rw,noexec,nosuid,size=20k,mode=1777 \
   -u nginx \
   -v "${CERTBOT_WEBROOT_PATH}:/cert_webroot" \
   -v "${PWD}/nginx.${WISE_ENVIRONMENT_TYPE}.conf:/etc/nginx/nginx.conf:ro" \
