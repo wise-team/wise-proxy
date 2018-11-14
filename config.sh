@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-if [ $WISE_ENVIRONMENT_TYPE = "production" ]; then
+if [ "${WISE_ENVIRONMENT_TYPE}" = "production" ]; then
     #§ 'export DOMAINS_OPTS="-d ' + data.config.proxy.certs.domains.production.join(" -d ") + '"'
     export DOMAINS_OPTS="-d wise.vote -d sql.wise.vote -d hub.wise.vote -d test.wise.vote"
-elif [ $WISE_ENVIRONMENT_TYPE = "staging" ]; then
+elif [ "${WISE_ENVIRONMENT_TYPE}" = "staging" ]; then
     #§ 'export DOMAINS_OPTS="-d ' + data.config.proxy.certs.domains.staging.join(" -d ") + '"'
     export DOMAINS_OPTS="-d dev.wise.jblew.pl -d sql.dev.wise.jblew.pl -d hub.dev.wise.jblew.pl -d test.dev.wise.jblew.pl"
 else 
