@@ -16,3 +16,4 @@ docker run -it --rm --name certbot \
     --standalone --preferred-challenges http \
     ${DOMAINS_OPTS}
 
+chmod -R 755 "${LETSENCRYPT_ETC_DIR}"
