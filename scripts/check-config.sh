@@ -3,20 +3,13 @@ set -e # fail on first error
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd "${DIR}"
 
-source ./config.sh
+source ../config.sh
 
 docker run \
-  --name "${CONTAINER_NAME}" \
-  --restart always \
-  --network="host" \
-  --memory-swappiness=0 \
-  --read-only \
-  --tmpfs /var/cache/nginx:rw,noexec,nosuid,size=${CACHE_SIZE} \
-  --tmpfs /var/run:rw,noexec,nosuid,size=20k \
   -u nginx \
   -v "${PWD}/nginx.${WISE_ENVIRONMENT_TYPE}.conf:/etc/nginx/nginx.conf:ro" \
   -v "${PWD}/conf:/conf:ro" \
   -v "${LETSENCRYPT_ETC_DIR}:/cert/:ro" \
   ${SITES_VOLUMES} ${HTML_VOLUMES} \
-  -d \
-  "${IMAGE}"
+  "${IMAGE}" \
+  nginx -t
