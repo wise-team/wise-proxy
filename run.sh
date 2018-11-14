@@ -10,7 +10,7 @@ docker run \
   --restart always \
   --network="host" \
   --memory-swappiness=0 \
-  --tmpfs /var/cache/nginx:rw,noexec,nosuid,size=${CACHE_SIZE},mode=1777,umask=000 \
+  --tmpfs /var/cache/nginx:rw,noexec,nosuid,size=${CACHE_SIZE},mode=1777,uid=1000,gid=1000 \
   --tmpfs /var/run:rw,noexec,nosuid,size=20k,mode=1777 \
   -u nginx \
   -v "${CERTBOT_WEBROOT_PATH}:/cert_webroot" \
