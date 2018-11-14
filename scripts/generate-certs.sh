@@ -6,11 +6,12 @@ cd "${DIR}"
 source ../config.sh
 
 
-sudo docker run -it --rm --name certbot \
+docker run -it --rm --name certbot \
     -v "${LETSENCRYPT_ETC_DIR}:/etc/letsencrypt" \
     -v "${LETSENCRYPT_LIB_DIR}:/var/lib/letsencrypt" \
     certbot/certbot certonly \
     --standalone --preferred-challenges http \
     --email ${CERTBOT_EMAIL} \
+    --agree-tos \
     ${DOMAINS_OPTS}
 
