@@ -7,6 +7,7 @@ source ./config.sh
 
 docker run \
   -u nginx \
+  -v "${CERTBOT_WEBROOT_PATH}:/cert/webroot:ro" \
   -v "${PWD}/nginx.${WISE_ENVIRONMENT_TYPE}.conf:/etc/nginx/nginx.conf:ro" \
   -v "${PWD}/conf:/conf:ro" \
   -v "${LETSENCRYPT_ETC_DIR}:/cert/:ro" \

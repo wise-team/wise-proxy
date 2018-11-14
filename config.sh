@@ -16,17 +16,25 @@ else
     exit 1
 fi
 
+
+#§ 'CERTBOT_WEBROOT_PATH="' + data.config.proxy.certs.webroot + '"'
+CERTBOT_WEBROOT_PATH="/opt/wise/certs/webroot"
+
 #§ 'export LETSENCRYPT_ETC_DIR="' + data.config.proxy.certs.letsencryptEtcDir + '"'
 export LETSENCRYPT_ETC_DIR="/opt/wise/certs/letsencrypt_etc"
 
 #§ 'export LETSENCRYPT_LIB_DIR="' + data.config.proxy.certs.letsencryptLibDir + '"'
 export LETSENCRYPT_LIB_DIR="/opt/wise/certs/letsencrypt_lib"
 
+
+
 export IMAGE="nginx"
 #§ 'export CONTAINER_NAME="' + data.config.proxy.docker.container + '"'
 export CONTAINER_NAME="wise-proxy"
 
 export CACHE_SIZE="256m"
+
+
 
 
 export SITES_VOLUMES=""

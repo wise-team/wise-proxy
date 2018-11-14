@@ -9,9 +9,10 @@ source ../config.sh
 docker run -it --rm --name certbot \
     -v "${LETSENCRYPT_ETC_DIR}:/etc/letsencrypt" \
     -v "${LETSENCRYPT_LIB_DIR}:/var/lib/letsencrypt" \
+    -p 80:80 \
     certbot/certbot certonly \
-    --standalone --preferred-challenges http \
     --email ${CERTBOT_EMAIL} \
     --agree-tos \
+    --standalone --preferred-challenges http \
     ${DOMAINS_OPTS}
 

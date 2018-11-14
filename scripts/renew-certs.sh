@@ -9,8 +9,9 @@ source ../config.sh
 docker run -it --rm --name certbot \
     -v "${LETSENCRYPT_ETC_DIR}:/etc/letsencrypt" \
     -v "${LETSENCRYPT_LIB_DIR}:/var/lib/letsencrypt" \
+    -v "${CERTBOT_WEBROOT_PATH}:/webroot:rw"
     certbot/certbot renew \
     --email ${CERTBOT_EMAIL} \
     --agree-tos \
-    --standalone --preferred-challenges http
+    --webroot --webroot-path="/webroot"
 
