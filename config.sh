@@ -33,12 +33,3 @@ export IMAGE="nginx"
 export CONTAINER_NAME="wise-proxy"
 
 export CACHE_SIZE="256m"
-
-
-
-
-export SITES_VOLUMES=""
-export HTML_VOLUMES=""
-
-export SITES_VOLUMES="${SITES_VOLUMES} -v ${PWD}/sites/default.conf:/sites/default.conf:ro "
-export HTML_VOLUMES="${HTML_VOLUMES} -v ${PWD}/html_main:/html/main:ro "

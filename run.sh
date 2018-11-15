@@ -17,6 +17,7 @@ docker run \
   -v "${PWD}/nginx.${WISE_ENVIRONMENT_TYPE}.conf:/etc/nginx/nginx.conf:ro" \
   -v "${PWD}/conf:/conf:ro" \
   -v "${LETSENCRYPT_ETC_DIR}:/cert/:ro" \
-  ${SITES_VOLUMES} ${HTML_VOLUMES} \
+  -v ${PWD}/sites:/sites:ro \
+  -v ${PWD}/html:/html:ro \
   -d \
   "${IMAGE}"
