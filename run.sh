@@ -5,6 +5,9 @@ cd "${DIR}"
 
 source ./config.sh
 
+docker stop "${CONTAINER_NAME}" || echo "No need to stop previous container."
+docker rm "${CONTAINER_NAME}" || echo "No need to rm previous container"
+
 docker run \
   --name "${CONTAINER_NAME}" \
   --restart always \
