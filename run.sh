@@ -34,7 +34,7 @@ CONTAINER_STATE=$(echo $CONTAINER_INFO | jq ".[0].State.Status")
 echo "State: ${CONTAINER_STATE}"
 
 
-if [[ "${CONTAINER_STATE}" == "running" ]]; then
+if [ "${CONTAINER_STATE}" = "running" ]; then
   echo "Container is running properly"
 else
   echo "Failed to start nginx (state=${CONTAINER_STATE}). Removing container and exitting"
