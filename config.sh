@@ -5,23 +5,28 @@ set -a # automatically export all variables
 source "${DIR}/.env"
 set +a
 
-if [ -z ${WISE_ENVIRONMENT_TYPE} ]; then
+if [ -z "${WISE_ENVIRONMENT_TYPE}" ]; then
     echo "WISE_ENVIRONMENT_TYPE env is not set"
     exit 1
 fi
 
-if [ -z ${CERTBOT_EMAIL} ]; then
+if [ -z "${CERTBOT_EMAIL}" ]; then
     echo "CERTBOT_EMAIL env is not set"
     exit 1
 fi
 
-if [ -z ${CERTBOT_PATH} ]; then
+if [ -z "${CERTBOT_PATH}" ]; then
     echo "CERTBOT_PATH env is not set"
     exit 1
 fi
 
-if [ -z ${CERT_DOMAINS} ]; then
+if [ -z "${CERT_DOMAINS}" ]; then
     echo "CERT_DOMAINS env is not set"
+    exit 1
+fi
+
+if [ -z "${ROOT_DOMAIN}" ]; then
+    echo "ROOT_DOMAIN env is not set"
     exit 1
 fi
 
