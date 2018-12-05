@@ -1,31 +1,36 @@
 #!/usr/bin/env bash
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-if [ "${WISE_ENVIRONMENT_TYPE}" = "production" ]; then
-    #§ 'export DOMAINS_OPTS="-d ' + data.config.proxy.certs.domains.production.join(" -d ") + '"'
-    export DOMAINS_OPTS="-d wise.vote -d sql.wise.vote -d hub.wise.vote -d test.wise.vote"
-    #§ 'export CERTBOT_EMAIL="' + data.config.environments.production.certbot.email + '"'
-    export CERTBOT_EMAIL="noisy.pl@gmail.com"
-elif [ "${WISE_ENVIRONMENT_TYPE}" = "staging" ]; then
-    #§ 'export DOMAINS_OPTS="-d ' + data.config.proxy.certs.domains.staging.join(" -d ") + '"'
-    export DOMAINS_OPTS="-d dev.wise.jblew.pl -d sql.dev.wise.jblew.pl -d hub.dev.wise.jblew.pl -d test.dev.wise.jblew.pl"
-    #§ 'export CERTBOT_EMAIL="' + data.config.environments.staging.certbot.email + '"'
-    export CERTBOT_EMAIL="jedrzejblew@gmail.com"
-else 
-    echo "Given WISE_ENVIRONMENT_TYPE not present or not supported"
+set -a # automatically export all variables
+source .env
+set +a
+
+if [ -z ${WISE_ENVIRONMENT_TYPE} ]; then
+    echo "WISE_ENVIRONMENT_TYPE env is not set"
+    exit 1
+fi
+
+if [ -z ${CERTBOT_EMAIL} ]; then
+    echo "CERTBOT_EMAIL env is not set"
+    exit 1
+fi
+
+if [ -z ${CERTBOT_PATH} ]; then
+    echo "CERTBOT_PATH env is not set"
+    exit 1
+fi
+
+if [ -z ${CERT_DOMAINS} ]; then
+    echo "CERT_DOMAINS env is not set"
     exit 1
 fi
 
 
-#§ 'CERTBOT_WEBROOT_PATH="' + data.config.proxy.certs.webroot + '"'
-CERTBOT_WEBROOT_PATH="/opt/wise/certs/webroot"
+export DOMAINS_OPTS="-d ${CERT_DOMAINS// / -d }"
 
-#§ 'export LETSENCRYPT_ETC_DIR="' + data.config.proxy.certs.letsencryptEtcDir + '"'
-export LETSENCRYPT_ETC_DIR="/opt/wise/certs/letsencrypt_etc"
-
-#§ 'export LETSENCRYPT_LIB_DIR="' + data.config.proxy.certs.letsencryptLibDir + '"'
-export LETSENCRYPT_LIB_DIR="/opt/wise/certs/letsencrypt_lib"
-
+export CERTBOT_WEBROOT_PATH="${CERTBOT_PATH}/webroot"
+export LETSENCRYPT_ETC_DIR="${CERTBOT_PATH}/letsencrypt_etc"
+export LETSENCRYPT_LIB_DIR="${CERTBOT_PATH}/letsencrypt_lib"
 
 
 export IMAGE="nginx"

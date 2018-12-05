@@ -6,7 +6,7 @@ cd "${DIR}"
 source ../config.sh
 
 
-docker run -it --rm --name certbot \
+docker run --rm --name certbot \
     -v "${LETSENCRYPT_ETC_DIR}:/etc/letsencrypt" \
     -v "${LETSENCRYPT_LIB_DIR}:/var/lib/letsencrypt" \
     -v "${CERTBOT_WEBROOT_PATH}:/webroot:rw" \

@@ -5,20 +5,22 @@ cd "${DIR}"
 
 source ./config.sh
 
-docker stop "${CONTAINER_NAME}" || echo "No need to stop previous container."
-docker rm "${CONTAINER_NAME}" || echo "No need to rm previous container"
+docker stop "${CONTAINER_NAME}" > /dev/null || echo "No need to stop previous container."
+docker rm "${CONTAINER_NAME}"  > /dev/null || echo "No need to rm previous container"
 
 docker run \
+  -it \
   --name "${CONTAINER_NAME}" \
   --restart always \
   --network="host" \
   --memory-swappiness=0 \
   --tmpfs /var/cache/nginx:rw,size=${CACHE_SIZE},uid=101,mode=1777 \
-  --tmpfs /var/run:rw,size=20k,uid=101,mode=1777 \
+  --env-file "${PWD}/.env" \
   -u root \
-  -v "${CERTBOT_WEBROOT_PATH}:/cert_webroot" \
-  -v "${PWD}/nginx.${WISE_ENVIRONMENT_TYPE}.conf:/etc/nginx/nginx.conf:ro" \
-  -v "${PWD}/conf:/conf:ro" \
-  -v "${LETSENCRYPT_ETC_DIR}:/cert/:ro" \
-  -d \
-  "${IMAGE}"
+  -v "${PWD}/conf_templates:/conf_templates:ro" \
+  -v "${PWD}/entry.sh:/entry.sh:ro" \
+  "${IMAGE}" /entry.sh
+
+# -d
+#-v "${CERTBOT_WEBROOT_PATH}:/cert_webroot" \
+#  -v "${LETSENCRYPT_ETC_DIR}:/cert/:ro" \
