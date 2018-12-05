@@ -20,6 +20,7 @@ docker run \
   -u root \
   -v "${PWD}/conf_templates:/conf_templates:ro" \
   -v "${PWD}/entry.sh:/entry.sh:ro" \
+  -v "${PWD}/html:/html:ro" \
   -d \
   "${IMAGE}" /entry.sh
 

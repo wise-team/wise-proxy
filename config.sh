@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-set -a # automatically export all variables
-source "${DIR}/.env"
-set +a
+while IFS== read -r key value; do
+  printf -v "$key" %s "$value" && export "$key"
+done < "${DIR}/.env"
 
 if [ -z "${WISE_ENVIRONMENT_TYPE}" ]; then
     echo "WISE_ENVIRONMENT_TYPE env is not set"
