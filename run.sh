@@ -30,7 +30,7 @@ sleep 3
 
 docker logs "${CONTAINER_NAME}"
 CONTAINER_INFO=$(docker container inspect ${CONTAINER_NAME})
-CONTAINER_STATE=$(echo $CONTAINER_INFO | ../jq ".[0].State.Status")
+CONTAINER_STATE=$(echo $CONTAINER_INFO | jq ".[0].State.Status")
 echo "State: ${CONTAINER_STATE}"
 
 
