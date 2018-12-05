@@ -5,8 +5,8 @@ cd "${DIR}"
 
 source ./config.sh
 
-docker stop "${CONTAINER_NAME}" > /dev/null || echo "No need to stop previous container."
-docker rm "${CONTAINER_NAME}"  > /dev/null || echo "No need to rm previous container"
+docker stop "${CONTAINER_NAME}" > /dev/null 2&>1 || echo "No need to stop previous container."
+docker rm "${CONTAINER_NAME}"  > /dev/null 2&>1 || echo "No need to rm previous container"
 
 docker run \
   --name "${CONTAINER_NAME}" \
@@ -26,7 +26,7 @@ docker run \
 
 
 echo "Wait for container and check its health"
-sleep 3
+sleep 4
 
 docker logs "${CONTAINER_NAME}"
 CONTAINER_INFO=$(docker container inspect ${CONTAINER_NAME})
@@ -34,7 +34,7 @@ CONTAINER_STATE=$(echo $CONTAINER_INFO | jq ".[0].State.Status")
 echo "State: ${CONTAINER_STATE}"
 
 
-if [ "${CONTAINER_STATE}" != "running" ]; then
+if [[ "${CONTAINER_STATE}" != "running" ]]; then
   echo "Failed to start nginx (state=${CONTAINER_STATE}). Removing container and exitting"
   docker stop "${CONTAINER_NAME}" || echo "Ok"
   docker rm "${CONTAINER_NAME}"
