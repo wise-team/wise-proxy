@@ -2,7 +2,7 @@
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 set -a # automatically export all variables
-source .env
+source "${DIR}/.env"
 set +a
 
 if [ -z ${WISE_ENVIRONMENT_TYPE} ]; then
