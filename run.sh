@@ -39,6 +39,6 @@ if [ ! "${CONTAINER_STATE}" == "running" ]; then
   docker stop "${CONTAINER_NAME}" || echo "Ok"
   docker rm "${CONTAINER_NAME}"
   exit 1
-elif
+else
   echo "Container is running properly"
 fi
