@@ -22,3 +22,22 @@ docker run \
   -v "${PWD}/entry.sh:/entry.sh:ro" \
   -d \
   "${IMAGE}" /entry.sh
+
+
+echo "Wait for container and check its health"
+sleep 3
+
+docker logs "${CONTAINER_NAME}"
+CONTAINER_INFO=$(docker container inspect ${CONTAINER_NAME})
+CONTAINER_STATE=$(echo $CONTAINER_INFO | ../jq ".[0].State.Status")
+echo "State: ${CONTAINER_STATE}"
+
+
+if [ ! "${CONTAINER_STATE}" == "running" ]; then
+  echo "Failed to start nginx. Exitting"
+  docker stop "${CONTAINER_NAME}" || echo "Ok"
+  docker rm "${CONTAINER_NAME}"
+  exit 1
+elif
+  echo "Container is running properly"
+fi
