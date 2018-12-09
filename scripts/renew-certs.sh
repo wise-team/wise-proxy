@@ -13,6 +13,7 @@ docker run --rm --name certbot \
     certbot/certbot renew \
     --email ${CERTBOT_EMAIL} \
     --agree-tos \
+    --non-interactive \
     --webroot --webroot-path="/webroot"
 
 chmod -R 755 "${LETSENCRYPT_ETC_DIR}"

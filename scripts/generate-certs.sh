@@ -13,6 +13,7 @@ docker run --rm --name certbot \
     certbot/certbot certonly \
     --email ${CERTBOT_EMAIL} \
     --agree-tos \
+    --non-interactive \
     --standalone --preferred-challenges http \
     ${DOMAINS_OPTS}
 
